@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>StartSmart India — Launch your business, step by step</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* Light mode (default) */
+  :root {
+    --primary: #2563EB;
+    --primary-dark: #1D4ED8;
+    --accent: #14B8A6;
+    --accent-dark: #0F766E;
+    --bg: #FFFFFF;
+    --surface: #F8FAFC;
+    --border: #E2E8F0;
+    --text: #1E293B;
+    --text-muted: #64748B;
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+    --hover-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
+  }
+
+  body.dark {
+    --primary: #3B82F6;
+    --primary-dark: #2563EB;
+    --accent: #2DD4BF;
+    --accent-dark: #14B8A6;
+    --bg: #020617;
+    --surface: #0F172A;
+    --border: #1E293B;
+    --text: #F1F5F9;
+    --text-muted: #94A3B8;
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  /* global */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  section {
+    padding: 5rem 0;
+  }
+
+  /* typography */
+  h1, h2, h3, .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    margin-bottom: 1rem;
+  }
+
+  .section-subhead {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* buttons */
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+  }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.75rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover {
+    background: var(--surface);
+    border-color: var(--primary);
+  }
+
+  /* cards */
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--hover-shadow);
+  }
+
+  /* grid */
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  /* navbar */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    background: rgba(var(--bg-rgb), 0.8);
+  }
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .logo span { color: var(--primary); }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--primary); }
+  .dark-toggle {
+    background: var(--surface);
+    border: none;
+    border-radius: 40px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+
+  /* hero */
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .hero-left { flex: 1; }
+  .hero-right { flex: 1; }
+  .hero-badge {
+    background: var(--surface);
+    color: var(--primary);
+    padding: 0.25rem 1rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+  .stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-family: 'Syne', sans-serif;
+    color: var(--primary);
+  }
+  .dashboard-preview {
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--card-shadow);
+  }
+
+  /* wizard */
+  .wizard-container {
+    background: var(--surface);
+    border-radius: 32px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+  }
+  .step-indicator {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .step {
+    background: var(--bg);
+    border-radius: 40px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .step.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  .step.completed {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  .wizard-step {
+    display: none;
+  }
+  .wizard-step.active-step {
+    display: block;
+  }
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  input, select, textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    transition: 0.2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  }
+  .dual-slider {
+    position: relative;
+    height: 40px;
+  }
+  .wizard-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+
+  /* result dashboard */
+  .result-dashboard {
+    display: none;
+    margin-top: 2rem;
+  }
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .metric-card {
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .metric-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+  }
+
+  /* Q&A panel */
+  .qa-panel {
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  .qa-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .message {
+    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    max-width: 85%;
+    font-size: 0.9rem;
+  }
+  .user-msg {
+    background: var(--primary);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .ai-msg {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .qa-input-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .qa-input-group input {
+    flex: 1;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 0 2rem;
+    text-align: center;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 1rem; }
+    .hero { flex-direction: column; }
+    .nav-links { display: none; }
+    .step-indicator { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-container">
+    <div class="logo">Start<span>Smart</span> India</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#planner">Planner</a>
+      <button class="dark-toggle" id="darkModeToggle"><i class="fas fa-moon"></i></button>
+      <a href="#planner" class="btn-primary" style="padding:0.5rem 1.2rem">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero -->
+  <section class="container" style="padding-top: 4rem;">
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-badge">✦ Trusted by 5,000+ founders</div>
+        <h1>Launch your business<br>in India — <span style="color:var(--accent)">step by step</span></h1>
+        <p class="section-subhead" style="margin-bottom: 1.5rem;">Legal setup, cost estimates, hiring plans, and marketing — all in one smart dashboard. No signup required.</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#planner" class="btn-primary">Start Planning →</a>
+          <button class="btn-outline" onclick="alert('See how it works: fill the form and get a custom roadmap')">Watch demo</button>
+        </div>
+        <div class="stats">
+          <div><span class="stat-number">12+</span><br>Registrations</div>
+          <div><span class="stat-number">30+</span><br>Industries</div>
+          <div><span class="stat-number">100%</span><br>Free</div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="dashboard-preview">
+          <div style="display:flex; gap:1rem; margin-bottom:1rem;"><i class="fas fa-chart-line"></i> <strong>Startup Snapshot</strong></div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div>Business type: Pvt Ltd</div>
+            <div>Est. cost: ₹4.2L</div>
+            <div>Timeline: 45 days</div>
+            <div>Risk: Medium</div>
+          </div>
+          <progress value="60" max="100" style="width:100%; height:8px; border-radius:10px;"></progress>
+          <p style="margin-top:0.5rem; font-size:0.8rem;">60% of roadmap completed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="container" id="features">
+    <h2>How it works</h2>
+    <div class="section-subhead">Three simple steps to your personalised startup plan</div>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-edit" style="font-size:2rem; color:var(--primary); margin-bottom:1rem;"></i><h3>1. Tell us your idea</h3><p>Industry, city, budget, team size — 3 minutes.</p></div>
+      <div class="card"><i class="fas fa-magic" style="font-size:2rem; color:var(--primary); margin-bottom:1rem;"></i><h3>2. We generate a roadmap</h3><p>Legal steps, costs, risks, and a week‑by‑week plan.</p></div>
+      <div class="card"><i class="fas fa-rocket" style="font-size:2rem; color:var(--primary); margin-bottom:1rem;"></i><h3>3. Launch with confidence</h3><p>Follow the dashboard, ask our AI advisor any question.</p></div>
+    </div>
+  </section>
+
+  <!-- Features grid -->
+  <section class="container">
+    <h2>Everything you need</h2>
+    <div class="section-subhead">From legal compliance to growth tactics</div>
+    <div class="grid-2">
+      <div class="card"><i class="fas fa-calculator"></i> <strong>Cost calculator</strong><br>City‑wise setup & operational costs</div>
+      <div class="card"><i class="fas fa-gavel"></i> <strong>Legal registrations</strong><br>GST, MSME, FSSAI, Trademark & more</div>
+      <div class="card"><i class="fas fa-chart-line"></i> <strong>Risk assessment</strong><br>High/medium/low risks for your industry</div>
+      <div class="card"><i class="fas fa-users"></i> <strong>Hiring planner</strong><br>Who to hire first & salary benchmarks</div>
+      <div class="card"><i class="fas fa-chalkboard"></i> <strong>Marketing playbook</strong><br>Channels that work for your niche</div>
+      <div class="card"><i class="fas fa-robot"></i> <strong>AI Q&A advisor</strong><br>Ask anything about your startup</div>
+    </div>
+  </section>
+
+  <!-- Wizard + Results -->
+  <section class="container" id="planner">
+    <h2>Build your startup plan</h2>
+    <div class="section-subhead">Free, no signup — just answer a few questions.</div>
+    <div class="wizard-container">
+      <div class="step-indicator" id="stepIndicator"></div>
+      <form id="wizardForm">
+        <div id="step1" class="wizard-step active-step">
+          <div class="form-group"><label>Business name *</label><input type="text" id="bizName" placeholder="e.g., Chai Pe Charcha"></div>
+          <div class="form-group"><label>Industry *</label><select id="industry"><option value="">Select</option><option>Food & Beverage</option><option>Tech / SaaS</option><option>Retail / E-commerce</option><option>Marketing Agency</option><option>Education / EdTech</option><option>Health & Wellness</option><option>Manufacturing</option><option>Other</option></select><input type="text" id="industryOther" placeholder="Describe" style="margin-top:0.5rem; display:none;"></div>
+          <div class="form-group"><label>City / State *</label><input type="text" id="city" placeholder="e.g., Bangalore, Karnataka"></div>
+          <div class="form-group"><label>Business model *</label><select id="model"><option>Online</option><option>Offline</option><option>Hybrid</option></select></div>
+        </div>
+        <div id="step2" class="wizard-step">
+          <div class="form-group"><label>Number of founders *</label><select id="founders"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+          <div class="form-group"><label>Initial budget (₹) *</label><div class="dual-slider"><input type="range" id="budgetMin" min="0" max="5000000" step="50000" value="0"><input type="range" id="budgetMax" min="0" max="5000000" step="50000" value="2500000"><div class="slider-track"></div><div class="slider-range"></div></div><div class="slider-vals"><span id="minLabel">₹0</span><span id="maxLabel">₹25L</span></div></div>
+          <div class="form-group"><label>Year 1 hiring plan *</label><select id="hiring"><option>No employees</option><option>1–2 employees</option><option>3–5 employees</option><option>6–8 employees</option></select></div>
+          <div class="form-group"><label>Describe your idea (optional)</label><textarea id="description" rows="2" placeholder="e.g., cloud kitchen serving South Indian food..."></textarea></div>
+          <div class="checkbox-row"><input type="checkbox" id="wantAlt"> <span>Suggest alternate business names</span></div>
+          <div class="checkbox-row"><input type="checkbox" id="wantHireRec"> <span>Recommend ideal team size</span></div>
+        </div>
+        <div class="wizard-buttons">
+          <button type="button" id="prevBtn" class="btn-outline" disabled>← Back</button>
+          <button type="button" id="nextBtn" class="btn-primary">Next →</button>
+          <button type="button" id="generateBtn" class="btn-primary" style="display:none;">Generate my plan →</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Loading & Results -->
+    <div id="loading" style="display:none; text-align:center; padding:2rem;"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Analysing your business...</p></div>
+    <div id="resultDashboard" class="result-dashboard"></div>
+  </section>
+
+  <!-- Venture opinion & encouragement -->
+  <section class="container" style="background: var(--surface); border-radius: 32px; margin: 2rem auto;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 2rem;">
+      <h2>Why this venture works</h2>
+      <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+        India is adding <strong>~100 new startups every day</strong>, yet the biggest hurdle for first‑time founders is not the idea — it’s the <strong>complexity of legal, financial, and operational setup</strong>. StartSmart India bridges that gap by offering a structured, data‑driven roadmap tailored to the Indian ecosystem. With government initiatives like Startup India, increased digital penetration, and a booming domestic market, the timing couldn’t be better.
+      </p>
+      <p style="font-size: 1.1rem; color: var(--text-muted);">
+        This platform is not just a tool — it’s a <strong>confidence booster</strong>. By breaking down every step from company registration to first customer, we turn uncertainty into action. The feedback from early users has been overwhelming: “I finally know what to do next.” That clarity is the fuel every entrepreneur needs. <strong>You have the idea; we give you the map. Go build something amazing.</strong> 🚀
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 StartSmart India — not legal/financial advice. Built for dreamers and doers.</p>
+    <p style="margin-top: 0.5rem;">✨ 100% free | No signup | Instant startup roadmap</p>
+  </div>
+</footer>
+
+<script>
+  // ---------- DARK MODE ----------
+  const toggle = document.getElementById('darkModeToggle');
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    const icon = toggle.querySelector('i');
+    if (document.body.classList.contains('dark')) icon.classList.replace('fa-moon', 'fa-sun');
+    else icon.classList.replace('fa-sun', 'fa-moon');
+  });
+
+  // ---------- WIZARD LOGIC ----------
+  let currentStep = 1;
+  const totalSteps = 2;
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const generateBtn = document.getElementById('generateBtn');
+  const stepIndicator = document.getElementById('stepIndicator');
+
+  function updateWizardUI() {
+    step1.classList.toggle('active-step', currentStep === 1);
+    step2.classList.toggle('active-step', currentStep === 2);
+    prevBtn.disabled = currentStep === 1;
+    if (currentStep === totalSteps) {
+      nextBtn.style.display = 'none';
+      generateBtn.style.display = 'inline-flex';
+    } else {
+      nextBtn.style.display = 'inline-flex';
+      generateBtn.style.display = 'none';
+    }
+    // update step indicators
+    stepIndicator.innerHTML = '';
+    for (let i = 1; i <= totalSteps; i++) {
+      const span = document.createElement('span');
+      span.className = 'step';
+      if (i === currentStep) span.classList.add('active');
+      if (i < currentStep) span.classList.add('completed');
+      span.innerText = `Step ${i}`;
+      stepIndicator.appendChild(span);
+    }
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (currentStep === 1) {
+      // basic validation
+      if (!document.getElementById('bizName').value.trim()) { alert('Please enter business name'); return; }
+      if (!document.getElementById('industry').value) { alert('Please select industry'); return; }
+      if (!document.getElementById('city').value.trim()) { alert('Please enter city'); return; }
+      currentStep++;
+      updateWizardUI();
+    }
+  });
+  prevBtn.addEventListener('click', () => {
+    if (currentStep > 1) { currentStep--; updateWizardUI(); }
+  });
+  updateWizardUI();
+
+  // Industry "Other" handling
+  const industrySelect = document.getElementById('industry');
+  const industryOther = document.getElementById('industryOther');
+  industrySelect.addEventListener('change', () => {
+    industryOther.style.display = industrySelect.value === 'Other' ? 'block' : 'none';
+  });
+
+  // Budget slider
+  const minSlider = document.getElementById('budgetMin');
+  const maxSlider = document.getElementById('budgetMax');
+  const minLabel = document.getElementById('minLabel');
+  const maxLabel = document.getElementById('maxLabel');
+  function formatRupee(v) { if(v===0) return '₹0'; if(v<100000) return '₹'+(v/1000).toFixed(0)+'K'; return '₹'+(v/100000).toFixed(1)+'L'; }
+  function updateSlider() {
+    let min = parseInt(minSlider.value);
+    let max = parseInt(maxSlider.value);
+    if (min > max) { [min, max] = [max, min]; minSlider.value = min; maxSlider.value = max; }
+    minLabel.innerText = formatRupee(min);
+    maxLabel.innerText = formatRupee(max);
+    const total = 5000000;
+    const left = (min/total)*100;
+    const width = ((max-min)/total)*100;
+    const rangeDiv = document.querySelector('.slider-range');
+    if(rangeDiv) { rangeDiv.style.left = left+'%'; rangeDiv.style.width = width+'%'; }
+  }
+  minSlider.addEventListener('input', updateSlider);
+  maxSlider.addEventListener('input', updateSlider);
+  updateSlider();
+
+  // ---------- GENERATE PLAN ----------
+  generateBtn.addEventListener('click', () => {
+    const bizName = document.getElementById('bizName').value.trim() || 'My Startup';
+    let industry = industrySelect.value;
+    if (industry === 'Other') industry = industryOther.value.trim() || 'General Business';
+    const city = document.getElementById('city').value.trim() || 'India';
+    const model = document.getElementById('model').value;
+    const founders = document.getElementById('founders').value;
+    const hiring = document.getElementById('hiring').value;
+    const budgetMin = parseInt(minSlider.value);
+    const budgetMax = parseInt(maxSlider.value);
+    const wantAlt = document.getElementById('wantAlt').checked;
+    const wantHireRec = document.getElementById('wantHireRec').checked;
+    const description = document.getElementById('description').value;
+
+    // loading
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('resultDashboard').style.display = 'none';
+
+    setTimeout(() => {
+      // mock data generation
+      const tier = /mumbai|delhi|bangalore|hyderabad|chennai|pune|kolkata/i.test(city) ? 'metro' : (/jaipur|ahmedabad|surat|lucknow|indore/i.test(city) ? 'tier2' : 'tier3');
+      const costMult = tier === 'metro' ? 1 : tier === 'tier2' ? 0.72 : 0.52;
+      const estMin = formatRupee(Math.round((budgetMin || 150000) * 0.6 * costMult));
+      const estMax = formatRupee(Math.round((budgetMax || 500000) * 0.9 * costMult));
+      const regs = ['GST Registration', 'MSME / Udyam', 'Shop & Establishment License', 'Trademark Registration'];
+      if (industry === 'Food & Beverage') regs.push('FSSAI Food License');
+      const risks = [['Market competition', 'high'], ['Cash flow management', 'med'], ['Regulatory compliance', 'low']];
+      const roadmap = [
+        { week: 'Week 1-2', task: 'Company registration (DSC, DIN, name approval)' },
+        { week: 'Week 3-4', task: 'Apply for GST, PAN, and open current account' },
+        { week: 'Month 2', task: 'MSME/Udyam registration, Shop & Establishment license' },
+        { week: 'Month 2-3', task: model === 'Online' ? 'Build website and set up payment gateway' : 'Setup physical space and signage' },
+        { week: 'Month 3', task: 'Hire first employees and set up payroll' },
+        { week: 'Month 3-4', task: 'Launch marketing campaigns and collect first reviews' }
+      ];
+      const hires = hiring === 'No employees' ? ['Founders handle all roles', 'Freelancers for design/accounts'] : ['Operations Manager', 'Sales Executive', 'Customer Support'];
+      const marketing = ['Google My Business', 'Instagram & LinkedIn', 'Referral program'];
+      const advice = `Focus on getting your first 10 customers manually. In ${city}, ${tier === 'metro' ? 'competition is high — differentiate on service' : 'word‑of‑mouth is your strongest channel'}. Keep a lean budget.`;
+
+      // build dashboard HTML
+      let altHtml = '';
+      if (wantAlt) {
+        const names = [`${bizName.split(' ')[0]} Hub`, `Smart ${industry.split(' ')[0]}`, `${city.split(',')[0]} Ventures`];
+        altHtml = `<div class="card"><strong>✨ Suggested names</strong><br>${names.join(' · ')}</div>`;
+      }
+      let hireRecHtml = '';
+      if (wantHireRec) {
+        hireRecHtml = `<div class="card"><strong>🤖 AI hiring tip</strong><br>For a ${founders}-founder team, start with 1‑2 key hires (sales/tech) before scaling.</div>`;
+      }
+
+      const dashboardHtml = `
+        <div class="dashboard-grid">
+          <div class="card metric-card"><div class="metric-value">${estMin} – ${estMax}</div><div>Est. setup cost</div></div>
+          <div class="card metric-card"><div class="metric-value">${founders}</div><div>Founders</div></div>
+          <div class="card metric-card"><div class="metric-value">${tier === 'metro' ? 'High' : (tier==='tier2' ? 'Medium' : 'Low')}</div><div>Competition level</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="card"><strong>📋 Required registrations</strong><ul>${regs.map(r=>`<li>✓ ${r}</li>`).join('')}</ul></div>
+          <div class="card"><strong>⚠️ Risk assessment</strong><ul>${risks.map(r=>`<li><span style="color:${r[1]==='high'?'#dc2626':r[1]==='med'?'#d97706':'#16a34a'}">●</span> ${r[0]}</li>`).join('')}</ul></div>
+        </div>
+        <div class="card"><strong>🗓️ Launch roadmap</strong><ul style="margin-top:0.5rem;">${roadmap.map(r=>`<li><strong>${r.week}:</strong> ${r.task}</li>`).join('')}</ul></div>
+        <div class="grid-2">
+          <div class="card"><strong>👥 Who to hire first</strong><div class="tag-wrap">${hires.map(h=>`<span class="tag">${h}</span>`).join('')}</div></div>
+          <div class="card"><strong>📢 Marketing channels</strong><div class="tag-wrap">${marketing.map(m=>`<span class="tag">${m}</span>`).join('')}</div></div>
+        </div>
+        ${altHtml}
+        ${hireRecHtml}
+        <div class="card"><strong>💡 Key advice</strong><br>${advice}</div>
+      `;
+      document.getElementById('resultDashboard').innerHTML = dashboardHtml;
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('resultDashboard').style.display = 'block';
+      document.getElementById('resultDashboard').scrollIntoView({ behavior: 'smooth' });
+
+      // store context for Q&A
+      window._bizContext = { bizName, industry, city, model, founders, budget: `${estMin}-${estMax}`, description };
+    }, 1500);
+  });
+
+  // ---------- ENHANCED Q&A SECTION (appended after result) ----------
+  // inject Q&A panel into result dashboard
+  const originalDisplay = document.getElementById('resultDashboard');
+  const observer = new MutationObserver(() => {
+    if (document.getElementById('resultDashboard').style.display === 'block' && !document.getElementById('qaPanel')) {
+      const qaDiv = document.createElement('div');
+      qaDiv.id = 'qaPanel';
+      qaDiv.className = 'qa-panel';
+      qaDiv.innerHTML = `
+        <h3><i class="fas fa-comments"></i> AI Business Advisor</h3>
+        <p style="margin-bottom:1rem;">Ask anything about your startup — legal, funding, marketing, operations.</p>
+        <div class="qa-messages" id="qaMessages"><div class="message ai-msg">👋 Hi! I'm your startup advisor. Ask me anything about your business plan.</div></div>
+        <div class="qa-input-group"><input type="text" id="qaInput" placeholder="e.g., How do I get my first 10 customers?"><button id="qaSendBtn" class="btn-primary">Ask →</button></div>
+      `;
+      document.getElementById('resultDashboard').appendChild(qaDiv);
+      // attach Q&A logic
+      const qaInput = document.getElementById('qaInput');
+      const qaSend = document.getElementById('qaSendBtn');
+      const qaMessages = document.getElementById('qaMessages');
+      function addMessage(text, isUser) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${isUser ? 'user-msg' : 'ai-msg'}`;
+        msgDiv.innerText = text;
+        qaMessages.appendChild(msgDiv);
+        qaMessages.scrollTop = qaMessages.scrollHeight;
+      }
+      function getAIResponse(question, ctx) {
+        const q = question.toLowerCase();
+        if (q.includes('customer') || q.includes('first client')) return `For your ${ctx.industry} in ${ctx.city}, start by reaching out to your network. Offer a 20% discount to first 5 clients in exchange for a testimonial. Use Google Maps and WhatsApp to build local trust.`;
+        if (q.includes('fund') || q.includes('investor')) return `Bootstrapping is safest. Once you have 3 months of revenue, apply for Startup India Seed Fund (up to ₹50L) or approach angel networks like LetsVenture.`;
+        if (q.includes('gst') || q.includes('tax')) return `GST registration is mandatory if turnover exceeds ₹20L (₹10L for special category states). File GSTR-3B by 20th of each month. Use ClearTax for automation.`;
+        if (q.includes('hire') || q.includes('employee')) return `Hire your first employee only after you have consistent revenue. Use Internshala for interns, Naukri for full‑time. Don't forget PF/ESI compliance.`;
+        return `Great question! For a ${ctx.industry} startup with ${ctx.founders} founder(s), the best next step is to validate your core assumption with a minimum viable product/service. Keep your budget lean and focus on one channel first. Need more details? I'm here to help!`;
+      }
+      qaSend.addEventListener('click', () => {
+        const question = qaInput.value.trim();
+        if (!question) return;
+        addMessage(question, true);
+        qaInput.value = '';
+        setTimeout(() => {
+          const ctx = window._bizContext || { industry: 'your business', city: 'India', founders: '1' };
+          const answer = getAIResponse(question, ctx);
+          addMessage(answer, false);
+        }, 500);
+      });
+      qaInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') qaSend.click(); });
+    }
+  });
+  observer.observe(document.getElementById('resultDashboard'), { attributes: true, attributeFilter: ['style'] });
+</script>
+<style>
+  .tag { background: var(--surface); padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.8rem; display: inline-block; margin: 0.2rem; border: 1px solid var(--border); }
+  .dual-slider { position: relative; height: 30px; margin: 1rem 0; }
+  .dual-slider input { position: absolute; width: 100%; pointer-events: all; -webkit-appearance: none; background: transparent; }
+  .dual-slider input::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; background: var(--primary); border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+  .slider-track { position: absolute; top: 50%; left: 0; right: 0; height: 4px; background: var(--border); border-radius: 4px; pointer-events: none; }
+  .slider-range { position: absolute; top: 50%; height: 4px; background: var(--primary); border-radius: 4px; pointer-events: none; }
+  .slider-vals { display: flex; justify-content: space-between; font-size: 0.8rem; }
+  .checkbox-row { margin: 0.8rem 0; display: flex; align-items: center; gap: 0.5rem; }
+  ul { list-style: none; padding-left: 0; }
+  li { margin-bottom: 0.3rem; }
+  .result-dashboard { display: none; margin-top: 2rem; }
+  .result-dashboard .card { margin-bottom: 1.5rem; }
+</style>
+</body>
+</html>
